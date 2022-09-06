@@ -1,23 +1,32 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import AddTaskForm from "./components/AddTaskForm";
+import Header from "./components/Header";
+import TaskList from "./components/TaskList";
+
 
 function App() {
+  
+  const [tasks, setTasks] = useState([])
+
+  const addTask = async (task) => {
+    setTasks([...tasks, task])
+  }
+
+  const markCompleted = async(id) => {
+    console.log(id)
+    console.log(tasks)
+    tasks.map((task) => {
+      task.id === id ? {...task, reminder: true} : task
+    })
+
+    console.log(task);
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="container">
+      <Header title='Add Tasks'/>
+      <AddTaskForm onAdd={addTask}/>
+      <TaskList tasks={tasks} onDoubleClick={markCompleted}/>
     </div>
   );
 }
