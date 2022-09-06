@@ -2,10 +2,14 @@ import React from "react";
 import { useState } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import PropTypes from 'prop-types'
+
 
 export default function AddTaskForm({onAdd}) {
 
 const [title, setName] = useState('')
+
+const [description, setDescription] = useState('')
 
 const [date_time, setDateTime] = useState('')
 
@@ -40,6 +44,18 @@ const [completed, setCompleted] = useState(false)
           id='title'
           name='title'
           onChange={(e) => { setName(e.target.value) }}
+        />
+      </div>
+
+      <div className="form-control">
+        <label>Description</label>
+        <input
+          type="text"
+          placeholder="Add Description"
+          value={description}
+          id="description"
+          name="description"
+          onChange={(e) => { setDescription(e.target.value) }}
         />
       </div>
 
