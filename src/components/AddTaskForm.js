@@ -1,6 +1,7 @@
 import React from "react";
 import { useState } from "react";
-
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function AddTaskForm({onAdd}) {
 
@@ -14,6 +15,7 @@ const [completed, setCompleted] = useState(false)
     e.preventDefault();
 
     onAdd({
+        id : Math.floor(Math.random() * 10000) + 1,
         title,
         date_time,
         completed,
@@ -43,14 +45,14 @@ const [completed, setCompleted] = useState(false)
 
       <div className="form-control">
         <label>Date & Time</label>
-        <input
-          type="datetime"
-          placeholder="Set Date Time"
-          id='date_time'
-          name='date_time'
-          value={date_time}
-          onChange={(e) => { setDateTime(e.target.value) }}
-        />
+        <DatePicker 
+          onChange={(date) => {
+            setDateTime(date)}
+          }
+          selected={date_time}
+          showTimeSelect
+          dateFormat="MMMM d, yyyy h:mm aa"
+          />
       </div>
 
       <div className='form-control form-control-check'>
@@ -60,7 +62,6 @@ const [completed, setCompleted] = useState(false)
           id='completed'
           name='completed'
           value={completed}
-          onChange={(e) => { setCompleted(e.target.value) }}
         />
       </div>
 
